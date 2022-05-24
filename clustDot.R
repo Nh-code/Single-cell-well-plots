@@ -12,7 +12,7 @@ clutstDot <- function(object,features){
     library(dplyr);library(ggtree);library(cowplot)
     df <- DotPlot(object,features = features)$data
     mat <- df %>% dplyr::select(-pct.exp, -avg.exp.scaled) %>%  # drop unused columns to faciliate widening
-        pivot_wider(names_from = features.plot, values_from = avg.exp ) %>% 
+        tidyr::pivot_wider(names_from = features.plot, values_from = avg.exp ) %>% 
         data.frame() # make df as tibbles -> matrix annoying
     row.names(mat) <- mat$id  # put gene in `row`
     mat <- mat[,-1] #drop gene column as now in rows
